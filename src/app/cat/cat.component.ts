@@ -8,7 +8,7 @@ import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
 })
 export class CatComponent implements OnInit {
 
-  catName = "";
+  catName;
   temp = "ERIC";
 
   constructor(private routes: ActivatedRoute) { 
@@ -16,12 +16,16 @@ export class CatComponent implements OnInit {
   }
 
   getCatName () {
-    this.catName = this.routes.params['name'];
+    //this.catName = this.routes.params['name'];
+    //this.catName = this.routes.queryParams.subscribe(params => this.catName = params[];)
+    //this.catName=this.routes.params.subscribe( params => params.name);
+    this.catName = this.routes.params.subscribe( params => params['name']);
+    console.log(this.routes.params.subscribe( params => console.log(params['name']) ));
+    console.log("catName:" + this.catName);
     this.temp = "Cathy";
   }
 
   ngOnInit() {
-    console.log("here" + this.routes);
     this.getCatName();
     
   }
